@@ -22,9 +22,14 @@ public class ProdutosService {
     private final CategoriaRepository categoriaRepository;
     private final StoreConverter storeConverter;
 
-    public ProdutoResponseDTO salvaProduto (ProdutoRequestDTO produtoRequestDTO) {
+    public ProdutoResponseDTO salvaProduto(ProdutoRequestDTO produtoRequestDTO) {
+
+        CategoriaEntity categoria = categoriaRepository.findById(produtoRequestDTO.getCategoriaId())
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
 
         ProdutosEntity entity = storeConverter.paraProdutoEntity(produtoRequestDTO);
+        entity.setCategoria(categoria);
+
         return storeConverter.paraProdutoDTO(produtosRepository.save(entity));
     }
 
