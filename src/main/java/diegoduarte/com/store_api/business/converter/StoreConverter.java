@@ -41,4 +41,6 @@ public class StoreConverter {
                 .nome(entity.getNome())
                 .build();
     }
+
+
 }
