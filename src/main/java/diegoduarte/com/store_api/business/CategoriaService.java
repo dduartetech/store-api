@@ -48,10 +48,10 @@ public class CategoriaService {
         CategoriaEntity entity = categoriaRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Categoria não encontrada"));
 
-        entity.setNome(categoriaRequestDTO.getNome());
-        CategoriaEntity salvo = storeConverter.updateCategoria(categoriaRequestDTO, entity);
-
-        return storeConverter.paraCategoriaDTO(categoriaRepository.save(salvo));
+        if (categoriaRequestDTO.getNome() != null) {
+            entity.setNome(categoriaRequestDTO.getNome());
+        }
+        return storeConverter.paraCategoriaDTO(categoriaRepository.save(entity));
     }
 
     public void deletaPorId (Long id) {
