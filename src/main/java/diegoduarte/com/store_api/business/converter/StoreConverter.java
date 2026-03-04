@@ -41,4 +41,10 @@ public class StoreConverter {
                 .nome(entity.getNome())
                 .build();
     }
+
+    public CategoriaEntity updateCategoria (CategoriaRequestDTO dto, CategoriaEntity categoria) {
+        return CategoriaEntity.builder()
+                .nome(dto.getNome() != null ? dto.getNome() : categoria.getNome())
+                .build();
+    }
 }
